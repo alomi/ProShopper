@@ -20,6 +20,7 @@ def scrape():
 
     html = BeautifulSoup(raw_html, 'html.parser')
 
+    # Hämta alla article taggar som har attributet 'data-addtional-info'
     for item in html.find_all('article', attrs={'data-addtional-info': True}):
         info = item['data-addtional-info']
         a = info.split("\"")
