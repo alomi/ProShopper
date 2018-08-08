@@ -41,3 +41,13 @@ class Product(models.Model):
 
         print("Category: " + self.product_category)
         print("Brand: " + self.product_brand)
+
+    def store_product(self, art):
+        product_info = art['data-addtional-info'].split("\"")
+
+        self.product_title = art['data-title']
+        self.product_price = product_info[3]
+        self.product_category = product_info[7]
+        self.product_brand = product_info[11]
+
+        self.save(self)
