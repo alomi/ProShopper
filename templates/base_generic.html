@@ -1,45 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Title of the document</title>
+    <meta charset="UTF-8">
+    <title>Title of the document</title>
 </head>
 
 <body>
 {% block poop %}{% endblock %}
-  <input type="text" id="newProduct" onkeypress="keyEvents(event)" placeholder="Add a product...">
-  <br>
-  <p>Shopping list:</p>
-  <ol id="products"></ol>
+<input type="text" id="newProduct" onkeypress="keyEvents(event)" placeholder="Add a product...">
+<br>
+<p>Shopping list:</p>
+<ol id="products"></ol>
 <!-- <input type='button' onclick='addProduct()' value='Submit' /> -->
 </body>
 
 <script>
-function keyEvents(event) {
-    var x = event.which || event.keyCode;
+    function keyEvents(event) {
+        var x = event.which || event.keyCode;
 
-    if (x == 13) {
-      addProduct();
+        if (x == 13) {
+            addProduct();
+        }
     }
-}
 </script>
 
 <script>
-var list = document.getElementById('products');
-var productList = [];
+    var list = document.getElementById('products');
+    var productList = [];
 
-function addProduct() {
-    var newProduct = document.getElementById('newProduct').value;
-    productList.push(newProduct);
-    if (!newProduct == '') {
-      document.getElementById('newProduct').innerHTML = newProduct;
-      var entry = document.createElement('li');
-      entry.appendChild(document.createTextNode(newProduct));
-      list.appendChild(entry);
-      document.getElementById("newProduct").value = "";
+    function addProduct() {
+        var newProduct = document.getElementById('newProduct').value;
+        productList.push(newProduct);
+        if (!newProduct == '') {
+            document.getElementById('newProduct').innerHTML = newProduct;
+            var entry = document.createElement('li');
+            entry.appendChild(document.createTextNode(newProduct));
+            list.appendChild(entry);
+            document.getElementById("newProduct").value = "";
+        }
+
     }
-
-}
 </script>
 </html>
 

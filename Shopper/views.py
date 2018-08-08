@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from Shopper.models import Product
 
+
 # Create your views here.
 def index(request):
     # Render the HTML template index.html with the data in the context variable
@@ -12,6 +13,3 @@ def index(request):
         request,
         'index.html',
     )
-
-
-
