@@ -33,7 +33,7 @@ category_size = {}
 
 def init():
     clear_db()
-
+    '''
     # Gets the 'a' tag based on xpath, gets the URL and splits it
     # retrieves the category specific part of the URL
     for i in range(1, number_of_categories):
@@ -48,6 +48,23 @@ def init():
         print(size)
 
     scrape()
+    '''
+    kiosk = 'https://www.ica.se/handla/browse/category.jsp?&Nrpp=128&categoryId=1627&currentStoreId=08900'
+    no = 0
+    for nrpp in range(1000, 1300):
+        while no < 1200:
+            no += 50
+            kott = 'https://www.ica.se/handla/browse/category.jsp?&Nrpp=' \
+                   + str(nrpp) + '&No=' \
+                   + str(no) + '&categoryId=1&currentStoreId=08900'
+            p_num = tester(kott, 'kott')
+            print("antal: " + str(p_num))
+            print("no: " + str(no))
+            print("nrpp: " + str(nrpp))
+            print()
+            if p_num > 1000:
+                print(p_num)
+                break
     driver.close()
 
 
@@ -73,6 +90,22 @@ def clear_db():
 def get_db_size():
     return Product.objects.all().count()
 
+def tester(url, category):
+    driver.get(url)
+
+    html = BeautifulSoup(driver.page_source, 'html.parser')
+
+    articles = html.find_all('article', {'data-addtional-info': True})
+    product_num = 0
+
+    for art in articles:
+        # Spara produkten i databasen
+        #Product().store_product(art)
+        product_num = product_num + 1
+
+
+
+    return product_num
 
 # TODO: Lägg till wait tills att produktelementet finns på sidan, ingen mening
 # att försöka scrapa innan det.
