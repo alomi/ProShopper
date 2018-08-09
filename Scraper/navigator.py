@@ -2,9 +2,9 @@ import time
 
 
 def scroll_bottom(driver, total_products):
-    # Get scroll height
 
-    while True:
+    loaded_products = 0
+    while loaded_products < total_products:
         # Scroll down to bottom
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         time.sleep(0.3)
@@ -15,7 +15,6 @@ def scroll_bottom(driver, total_products):
             '.getElementsByTagName("li").length;'
         )
 
-        if loaded_products >= total_products:
-            break
-
-    return driver.page_source
+    return driver.find_element_by_xpath(
+        '//*[@id="productList"]'
+    ).get_attribute("outerHTML")
